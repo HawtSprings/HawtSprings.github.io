@@ -128,7 +128,7 @@
     <p>+Dinner TBD</p>
 
     <div class="button-container">
-        <a href="page1.php" class="button">I'm Coming!</a>
+        <a href="page1.html" class="button">I'm Coming!</a>
         <a href="javascript:void(0);" id="nah-button" class="nah-button" onclick="moveNahButton()">Nah, Mate</a>
     </div>
 </div>
