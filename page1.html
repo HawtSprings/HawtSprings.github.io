@@ -1,21 +1,3 @@
-<?php
-include 'db.php'; // Include the database connection
-
-// Process form submission
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['name'])) {
-    $name = htmlspecialchars($_POST['name']); // Sanitize user input
-
-    // Insert the name into the database
-    $stmt = $pdo->prepare("INSERT INTO names (name) VALUES (:name)");
-    $stmt->bindParam(':name', $name);
-    $stmt->execute();
-
-    // Redirect to page2.php after saving the name
-    header("Location: page2.php");
-    exit;
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +7,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['name'])) {
     <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <style>
-        /* Fullscreen video styling */
         body, html {
             margin: 0;
             padding: 0;
@@ -49,33 +30,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['name'])) {
         }
         .content {
             position: absolute;
-            top: 15%; /* Moved up significantly */
+            top: 15%;
             left: 50%;
-            transform: translateX(-50%); /* Centered horizontally */
+            transform: translateX(-50%);
             max-width: 80%;
             padding: 20px;
-            z-index: 1; /* Ensure content is above video */
-            text-shadow: 2px 2px 4px #8b005f; /* Subtle dark pink shadow */
+            z-index: 1;
+            text-shadow: 2px 2px 4px #8b005f;
         }
         h1 {
             font-size: 2.5em;
             margin: 0;
-        }
-        p {
-            font-size: 1.2em;
-            margin: 10px 0 20px;
-        }
-        .input-box {
-            padding: 12px;
-            font-size: 1em;
-            border: 2px solid #ff69b4;
-            border-radius: 5px;
-            background-color: #ffebf1; /* Light pink background */
-            color: #8b005f;
-            width: 100%;
-            max-width: 300px;
-            text-align: left; /* Align placeholder text to the left */
-            margin: 10px 0;
         }
         .button {
             display: inline-block;
@@ -86,13 +51,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['name'])) {
             border: none;
             border-radius: 5px;
             text-decoration: none;
-            transition: background-color 0.3s ease;
             cursor: pointer;
-        }
-        .button:hover {
-            background-color: #ff1493;
+            transition: all 0.3s ease;
         }
     </style>
+</head>
 <body>
 <video class="background-video" autoplay loop muted playsinline>
     <source src="background.mp4" type="video/mp4">
@@ -100,13 +63,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['name'])) {
 </video>
 
 <div class="content">
-    <h1>Yayy!!!</h1>
-    <p>I'm so glad you're coming!!</p>
-    <p>Add your name below :3</p>
-    <form action="page1.html" method="post">
-        <input type="text" name="name" placeholder="Name please :3" class="input-box" required>
-        <button type="submit" class="button">Done</button>
-    </form>
+    <h1>Deets:</h1>
+    <a href="https://www.papispizza.com.au/" target="_blank" class="link">Dinner: Papi's Pizza Rye</a>
+    <p>Time: 5:30 </p>
+    <p>After:</p>
+    <p>Mornington Peninsula Hot Springs</p>
+    <p>Website: <a href="https://www.peninsulahotsprings.com/" target="_blank" class="link">https://www.peninsulahotsprings.com/</a></p>
+    <p>Address: <a href="https://maps.app.goo.gl/e6jDLHv4dXkCmBKt5" target="_blank" class="link">https://maps.app.goo.gl/e6jDLHv4dXkCmBKt5</a></p>
+    <p>Price: $55</p>
+
+    <a href="page2.html" id="yesButton" class="button">Sounds good!!</a>
+    <a href="#" id="noButton" class="button" onclick="adjustButtonSizes(event)">ewwww no</a>
 </div>
+
+<script>
+    let noButtonSize = 1;
+    let yesButtonSize = 1;
+
+    function adjustButtonSizes(event) {
+        event.preventDefault(); // Prevents navigation on button click
+        noButtonSize *= 0.9; // Shrinks "ewwww no" button
+        yesButtonSize *= 1.1; // Grows "Sounds good!!" button
+
+        document.getElementById('noButton').style.transform = `scale(${noButtonSize})`;
+        document.getElementById('yesButton').style.transform = `scale(${yesButtonSize})`;
+    }
+</script>
 </body>
 </html>
